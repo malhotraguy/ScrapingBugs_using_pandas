@@ -44,7 +44,7 @@ for BugId in [214094, 214195, 215424]:#range(214000,353001):
         if "status" in col:
             #print(col)
             if col[col.index("status") + 2].lower() == "resolved" or "verified" or "closed":
-                print(col[col.index("status") + 2].lower() )
+                #print(col[col.index("status") + 2].lower() )
                 Status_seen= True
                 if (Resolution_seen):
                     Considered_Bug = True
@@ -52,7 +52,7 @@ for BugId in [214094, 214195, 215424]:#range(214000,353001):
                     break
         if "resolution" in col:
             if col[col.index("resolution") + 2].lower() == "fixed":
-                print("Resolution=",col[col.index("resolution") + 2].lower())
+                #print("Resolution=",col[col.index("resolution") + 2].lower())
                 Resolution_seen = True
                 if (Status_seen):
                     Considered_Bug = True
@@ -88,7 +88,7 @@ for BugId in [214094, 214195, 215424]:#range(214000,353001):
                     Status_count = j+1
                     if col[col.index("status") + 2] == "reopened":
                         Status_done =True
-                        print("Write in status Reassigned", BugId)
+                        #print("Write in status Reassigned", BugId)
                         #status_row += updating_to_xlsx("Status.xlsx", status_row, 1, BugId, status_flag)
                         status_Reassigned.append(BugId)
 
@@ -96,14 +96,14 @@ for BugId in [214094, 214195, 215424]:#range(214000,353001):
 
                 elif (col[col.index("status") + 2] == "reopened") and j==Status_count:
                     Status_done = True
-                    print("Write in status Reassigned", BugId)
+                    #print("Write in status Reassigned", BugId)
                     #status_row += updating_to_xlsx("Status.xlsx", status_row, 1, BugId,status_flag)
                     status_Reassigned.append(BugId)
                     Field_list.remove(status_NotReassigned)
 
             elif "severity" in col and not(Severity_done):
                 if (not (col[col.index("severity") + 1].isspace()) and (col[col.index("severity") + 1].isspace()) != "--"):
-                    print("Write in severity Reassigned", BugId)
+                    #print("Write in severity Reassigned", BugId)
                     severity_Reassigned.append(BugId)
                     Severity_done =  True
                     #severity_row += updating_to_xlsx("Severity.xlsx", severity_row, 1, BugId)
@@ -112,28 +112,28 @@ for BugId in [214094, 214195, 215424]:#range(214000,353001):
 
             elif "version" in col and not(Version_done):
                 if (not (col[col.index("version") + 1].isspace()) and (col[col.index("version") + 1].isspace()) != "--"):
-                    print("Write in version Reassigned", BugId)
+                    #print("Write in version Reassigned", BugId)
                     version_Reassigned.append(BugId)
                     Version_done = True
                     #version_row += updating_to_xlsx("Version.xlsx", version_row, 1, BugId)
                     Field_list.remove(version_NotReassigned)
             elif "product" in col and not(Product_done):
                 if (not (col[col.index("product") + 1].isspace()) and (col[col.index("product") + 1].isspace()) != "--"):
-                    print("Write in product Reassigned", BugId)
+                    #print("Write in product Reassigned", BugId)
                     product_Reassigned.append(BugId)
                     Product_done = True
                     #product_row += updating_to_xlsx("Product.xlsx", product_row, 1, BugId)
                     Field_list.remove(product_NotReassigned)
             elif "os" in col and not(Os_done):
                 if (not (col[col.index("os") + 1].isspace()) and (col[col.index("os") + 1].isspace()) != "--"):
-                    print("Write in os Reassigned", BugId)
+                    #print("Write in os Reassigned", BugId)
                     os_Reassigned.append(BugId)
                     Os_done = True
                    # os_row += updating_to_xlsx("Os.xlsx", os_row, 1, BugId)
                     Field_list.remove(os_NotReassigned)
             elif "priority" in col and not(Priority_done):
                 if (not (col[col.index("priority") + 1].isspace()) and (col[col.index("priority") + 1].isspace()) != "--"):
-                    print("Write in priority Reassigned", BugId)
+                    #print("Write in priority Reassigned", BugId)
                     priority_Reassigned.append(BugId)
                     Priority_done = True
                     #priority_row += updating_to_xlsx("Priority.xlsx", priority_row, 1, BugId)
@@ -141,7 +141,7 @@ for BugId in [214094, 214195, 215424]:#range(214000,353001):
 
             elif "component" in col and not(Component_done):
                 if (not (col[col.index("component") + 1].isspace()) and (col[col.index("component") + 1].isspace()) != "--"):
-                    print("Write in component Reassigned", BugId)
+                    #print("Write in component Reassigned", BugId)
                     component_Reassigned.append(BugId)
                     Component_done = True
                     #component_row += updating_to_xlsx("Component.xlsx", component_row, 1, BugId)
@@ -149,26 +149,37 @@ for BugId in [214094, 214195, 215424]:#range(214000,353001):
 
             elif "assignee" in col and not(Assignee_done):
                 if (not (col[col.index("assignee") + 1].isspace()) and (col[col.index("assignee") + 1].isspace()) != "--"):
-                    print("Write in assignee Reassigned", BugId)
+                    #print("Write in assignee Reassigned", BugId)
                     assignee_Reassigned.append(BugId)
                     Assignee_done = True
                     # assignee_row += updating_to_xlsx("Assignee.xlsx", assignee_row, 1, BugId)
                     Field_list.remove(assignee_NotReassigned)
 
             col = []
-    print(Field_list)
+    #print(Field_list)
     for left in Field_list:
-        print(left,"Write in NotReassigned",BugId)
+        #print(left,"Write in NotReassigned",BugId)
         left.append(BugId)
+def DF_to_EXCEL(df,File_Name):
 
+    writer = pd.ExcelWriter(File_Name+'.xlsx')
+    df.to_excel(writer, sheet_name='Sheet')
+    writer.save()
 df_Status=pd.DataFrame({"Reassigned":pd.Series(status_Reassigned),"Not-Reassigned":pd.Series(status_NotReassigned)})
+DF_to_EXCEL(df_Status,"Status")
 df_Severity=pd.DataFrame({'Reassigned':pd.Series(severity_Reassigned),'Not-Reassigned':pd.Series(severity_NotReassigned)})
+DF_to_EXCEL(df_Severity,"Severity")
 df_Version=pd.DataFrame({'Reassigned':pd.Series(version_Reassigned),'Not-Reassigned':pd.Series(version_NotReassigned)})
+DF_to_EXCEL(df_Version,"Version")
 df_Product=pd.DataFrame({'Reassigned':pd.Series(product_Reassigned),'Not-Reassigned':pd.Series(product_NotReassigned)})
+DF_to_EXCEL(df_Product,"Product")
 df_Os=pd.DataFrame({'Reassigned':pd.Series(os_Reassigned),'Not-Reassigned':pd.Series(os_NotReassigned)})
+DF_to_EXCEL(df_Os,"Os")
 df_Priority=pd.DataFrame({'Reassigned':pd.Series(priority_Reassigned),'Not-Reassigned':pd.Series(priority_NotReassigned)})
+DF_to_EXCEL(df_Priority,"Priority")
 df_Component=pd.DataFrame({'Reassigned':pd.Series(component_Reassigned),'Not-Reassigned':pd.Series(component_NotReassigned)})
+DF_to_EXCEL(df_Component,"Component")
 df_Assignee=pd.DataFrame({'Reassigned':pd.Series(assignee_Reassigned),'Not-Reassigned':pd.Series(assignee_NotReassigned)})
+DF_to_EXCEL(df_Assignee,"Assignee")
 
-print(df_Status)
 print(status_Reassigned)
