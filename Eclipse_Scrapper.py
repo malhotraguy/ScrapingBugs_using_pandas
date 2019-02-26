@@ -157,7 +157,7 @@ for BugId in range(214000,353001):
 
             col = []
         #print(Field_list)
-        print(status_Reassigned)
+        #print(status_Reassigned)
         for left in Field_list:
             #print(left,"Write in NotReassigned",BugId)
             left.append(BugId)
