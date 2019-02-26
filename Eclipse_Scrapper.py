@@ -1,3 +1,5 @@
+import time
+start = time.time()
 import requests
 import lxml.html as lh
 from fake_useragent import UserAgent
@@ -184,9 +186,11 @@ df_Component=pd.DataFrame({'Reassigned':pd.Series(component_Reassigned),'Not-Rea
 DF_to_EXCEL(df_Component,"Component")
 df_Assignee=pd.DataFrame({'Reassigned':pd.Series(assignee_Reassigned),'Not-Reassigned':pd.Series(assignee_NotReassigned)})
 DF_to_EXCEL(df_Assignee,"Assignee")
-
+end = time.time()
+print("Script took ", end - start)
 #print("Field_list=",Field_list)
 with open("Conclusion.txt", "w") as f:
+    f.write("Script took ", end - start)
     f.write("status is reassigned in=", len(status_Reassigned), "Buds", "which is",
             ((len(status_Reassigned) / len(Total_Bugs_Considered)) * 100), "% of Total Bug IDs\n")
     f.write("severity is reassigned in=", len(severity_Reassigned), "Buds", "which is",
