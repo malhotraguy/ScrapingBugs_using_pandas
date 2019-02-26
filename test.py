@@ -21,7 +21,7 @@ os_NotReassigned=[]
 priority_NotReassigned=[]
 component_NotReassigned=[]
 assignee_NotReassigned=[]
-for BugId in [214094, 214195, 215424]:#range(214000,353001):
+for BugId in range(214000,353001):
     #BugId=215518
     url = 'https://bugs.eclipse.org/bugs/show_activity.cgi?id=' + str(BugId)
     # Create a handle, page, to handle the contents of the website
