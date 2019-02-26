@@ -88,7 +88,7 @@ for BugId in range(214000,353001):
                     Status_count = j+1
                     if col[col.index("status") + 2] == "reopened":
                         Status_done =True
-                        #print("Write in status Reassigned", BugId)
+                        print("Write in status Reassigned", BugId)
                         #status_row += updating_to_xlsx("Status.xlsx", status_row, 1, BugId, status_flag)
                         status_Reassigned.append(BugId)
 
@@ -156,10 +156,11 @@ for BugId in range(214000,353001):
                     Field_list.remove(assignee_NotReassigned)
 
             col = []
-    #print(Field_list)
-    for left in Field_list:
-        #print(left,"Write in NotReassigned",BugId)
-        left.append(BugId)
+        #print(Field_list)
+        print(status_Reassigned)
+        for left in Field_list:
+            #print(left,"Write in NotReassigned",BugId)
+            left.append(BugId)
 def DF_to_EXCEL(df,File_Name):
 
     writer = pd.ExcelWriter(File_Name+'.xlsx')
