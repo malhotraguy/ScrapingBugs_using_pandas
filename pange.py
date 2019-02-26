@@ -25,4 +25,7 @@ with open("Conclusion.txt", "w") as f:
 
 #print("Field_list="+Field_list)
 
+for BugId in range(506000 - 655001):
+    url = 'https://bugzilla.gnome.org/show_activity.cgi?id=' + str(BugId)
+
 

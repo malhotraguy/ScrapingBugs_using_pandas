@@ -23,7 +23,7 @@ os_NotReassigned=[]
 priority_NotReassigned=[]
 component_NotReassigned=[]
 assignee_NotReassigned=[]
-for BugId in range(506000 - 655001): #[214172, 221927]:
+for BugId in range(506000 - 655001): #[214094, 214195, 215424, 215518, 215858]:
     #BugId=215518
     url = 'https://bugzilla.gnome.org/show_activity.cgi?id=' + str(BugId)
     # Create a handle, page, to handle the contents of the website
@@ -207,5 +207,3 @@ with open("Conclusion.txt", "w") as f:
             str((len(component_Reassigned) / len(Total_Bugs_Considered)) * 100)+ "% of Total Bug IDs\n")
     f.write("assignee is reassigned in="+ len(assignee_Reassigned)+ "Bugs"+ "which is"+
             str((len(assignee_Reassigned) / len(Total_Bugs_Considered)) * 100)+ "% of Total Bug IDs\n")
-
-
