@@ -1,0 +1,2 @@
+Script took 71601.85741949081
+status is reassigned in=1102 Bugs which is 1.9878420549452533% of Total Bug IDs
