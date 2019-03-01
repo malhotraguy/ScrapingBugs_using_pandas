@@ -23,7 +23,7 @@ os_NotReassigned=[]
 priority_NotReassigned=[]
 component_NotReassigned=[]
 assignee_NotReassigned=[]
-for BugId in range(214000,353001): #[214094, 214195, 215424, 215518, 215858]:
+for BugId in [304852,304853]:#in range(214000,353001): #[214094, 214195, 215424, 215518, 215858]:
     #BugId=215518
     url = 'https://bugs.eclipse.org/bugs/show_activity.cgi?id=' + str(BugId)
     # Create a handle, page, to handle the contents of the website
@@ -43,6 +43,7 @@ for BugId in range(214000,353001): #[214094, 214195, 215424, 215518, 215858]:
         for t in tr_elements[j]:
             name = (str(t.text_content().replace(" ", "")).replace("\n", ""))
             col.append(((str(name).lower())))
+        print(col)
         if "status" in col:
             ##print(col)
             if col[col.index("status") + 2].lower() == "resolved" or "verified" or "closed":
@@ -81,9 +82,9 @@ for BugId in range(214000,353001): #[214094, 214195, 215424, 215518, 215858]:
                 # #print(t)
                 name = (str(t.text_content().replace(" ", "")).replace("\n", ""))
 
-                # #print(name,type(name),name.isalnum())
+                print(name)
                 col.append(((str(name).lower()).replace(" ", "")).replace("\n", ""))
-            # #print(col)
+            print(col)
 
             if "status" in col and not(Status_done):
 
@@ -104,7 +105,7 @@ for BugId in range(214000,353001): #[214094, 214195, 215424, 215518, 215858]:
                     status_Reassigned.append(BugId)
                     del Field_list["status_NotReassigned"]
 
-            elif "severity" in col and not(Severity_done):
+            if "severity" in col and not(Severity_done):
                 if (not (col[col.index("severity") + 1].isspace()) and (col[col.index("severity") + 1].isspace()) != "--"):
                     #print("col[col.index('severity') + 1]=",type(col[col.index("severity") + 1]))
                     ##print("Write in severity Reassigned", BugId)
@@ -114,28 +115,28 @@ for BugId in range(214000,353001): #[214094, 214195, 215424, 215518, 215858]:
                     del Field_list["severity_NotReassigned"]
 
 
-            elif "version" in col and not(Version_done):
+            if "version" in col and not(Version_done):
                 if (not (col[col.index("version") + 1].isspace()) and (col[col.index("version") + 1].isspace()) != "--"):
                     ##print("Write in version Reassigned", BugId)
                     version_Reassigned.append(BugId)
                     Version_done = True
                     #version_row += updating_to_xlsx("Version.xlsx", version_row, 1, BugId)
                     del Field_list["version_NotReassigned"]
-            elif "product" in col and not(Product_done):
+            if "product" in col and not(Product_done):
                 if (not (col[col.index("product") + 1].isspace()) and (col[col.index("product") + 1].isspace()) != "--"):
                     ##print("Write in product Reassigned", BugId)
                     product_Reassigned.append(BugId)
                     Product_done = True
                     #product_row += updating_to_xlsx("Product.xlsx", product_row, 1, BugId)
                     del Field_list["product_NotReassigned"]
-            elif "os" in col and not(Os_done):
+            if "os" in col and not(Os_done):
                 if (not (col[col.index("os") + 1].isspace()) and (col[col.index("os") + 1].isspace()) != "--"):
                     ##print("Write in os Reassigned", BugId)
                     os_Reassigned.append(BugId)
                     Os_done = True
                    # os_row += updating_to_xlsx("Os.xlsx", os_row, 1, BugId)
                     del Field_list["os_NotReassigned"]
-            elif "priority" in col and not(Priority_done):
+            if "priority" in col and not(Priority_done):
                 if (not (col[col.index("priority") + 1].isspace()) and (col[col.index("priority") + 1].isspace()) != "--"):
                     ##print("Write in priority Reassigned", BugId)
                     priority_Reassigned.append(BugId)
@@ -143,7 +144,7 @@ for BugId in range(214000,353001): #[214094, 214195, 215424, 215518, 215858]:
                     #priority_row += updating_to_xlsx("Priority.xlsx", priority_row, 1, BugId)
                     del Field_list["priority_NotReassigned"]
 
-            elif "component" in col and not(Component_done):
+            if "component" in col and not(Component_done):
                 if (not (col[col.index("component") + 1].isspace()) and (col[col.index("component") + 1].isspace()) != "--"):
                     ##print("Write in component Reassigned", BugId)
                     component_Reassigned.append(BugId)
@@ -151,9 +152,9 @@ for BugId in range(214000,353001): #[214094, 214195, 215424, 215518, 215858]:
                     #component_row += updating_to_xlsx("Component.xlsx", component_row, 1, BugId)
                     del Field_list["component_NotReassigned"]
 
-            elif "assignee" in col and not(Assignee_done):
+            if "assignee" in col and not(Assignee_done):
                 if (not (col[col.index("assignee") + 1].isspace()) and (col[col.index("assignee") + 1].isspace()) != "--"):
-                    ##print("Write in assignee Reassigned", BugId)
+                    print("Write in assignee Reassigned", BugId)
                     assignee_Reassigned.append(BugId)
                     Assignee_done = True
                     # assignee_row += updating_to_xlsx("Assignee.xlsx", assignee_row, 1, BugId)
