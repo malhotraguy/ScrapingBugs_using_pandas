@@ -23,7 +23,7 @@ os_NotReassigned=[]
 priority_NotReassigned=[]
 component_NotReassigned=[]
 assignee_NotReassigned=[]
-for BugId in [304852,304853]:#in range(214000,353001): #[214094, 214195, 215424, 215518, 215858]:
+for BugId in range(214000,353001): #[214094, 214195, 215424, 215518, 215858]:
     #BugId=215518
     url = 'https://bugs.eclipse.org/bugs/show_activity.cgi?id=' + str(BugId)
     # Create a handle, page, to handle the contents of the website
@@ -32,18 +32,20 @@ for BugId in [304852,304853]:#in range(214000,353001): #[214094, 214195, 215424,
     doc = lh.fromstring(page.content)
     # Parse data that are stored between <tr>..</tr> of HTML
     tr_elements = doc.xpath('//tr')
+    #print(tr_elements)
     # Create empty list
     col = []
     Status_seen = False
     Resolution_seen = False
     Considered_Bug = False
     tr_elements.reverse()
+    #print(tr_elements)
     for j in range(0, len(tr_elements)):
 
         for t in tr_elements[j]:
             name = (str(t.text_content().replace(" ", "")).replace("\n", ""))
             col.append(((str(name).lower())))
-        print(col)
+        #print(col)
         if "status" in col:
             ##print(col)
             if col[col.index("status") + 2].lower() == "resolved" or "verified" or "closed":
@@ -74,7 +76,7 @@ for BugId in [304852,304853]:#in range(214000,353001): #[214094, 214195, 215424,
         Assignee_done = False
         Status_count=0
 
-        print(BugId,"is considered")
+        #print(BugId,"is considered")
         Total_Bugs_Considered.append(BugId)
         for j in range(1, len(tr_elements)):
             for t in tr_elements[j]:
@@ -82,9 +84,9 @@ for BugId in [304852,304853]:#in range(214000,353001): #[214094, 214195, 215424,
                 # #print(t)
                 name = (str(t.text_content().replace(" ", "")).replace("\n", ""))
 
-                print(name)
+                #print(name)
                 col.append(((str(name).lower()).replace(" ", "")).replace("\n", ""))
-            print(col)
+            #print(col)
 
             if "status" in col and not(Status_done):
 
@@ -154,7 +156,7 @@ for BugId in [304852,304853]:#in range(214000,353001): #[214094, 214195, 215424,
 
             if "assignee" in col and not(Assignee_done):
                 if (not (col[col.index("assignee") + 1].isspace()) and (col[col.index("assignee") + 1].isspace()) != "--"):
-                    print("Write in assignee Reassigned", BugId)
+                    #print("Write in assignee Reassigned", BugId)
                     assignee_Reassigned.append(BugId)
                     Assignee_done = True
                     # assignee_row += updating_to_xlsx("Assignee.xlsx", assignee_row, 1, BugId)
