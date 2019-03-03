@@ -25,9 +25,10 @@ component_NotReassigned=[]
 assignee_NotReassigned=[]
 for BugId in range(506000,655001): #[214094, 214195, 215424, 215518, 215858]:
     #BugId=215518
-    url = 'https://bugzilla.gnome.org/show_activity.cgi?id=' + str(BugId)
-    # Create a handle, page, to handle the contents of the website
-    page = requests.get(url, headers=hdr)
+    with requests.Session() as s:
+        url = 'https://bugs.eclipse.org/bugs/show_activity.cgi?id=' + str(BugId)
+        page = s.get(url, headers=hdr)
+    # page = requests.get(url, headers=hdr)
     # Store the contents of the website under doc
     doc = lh.fromstring(page.content)
     # Parse data that are stored between <tr>..</tr> of HTML

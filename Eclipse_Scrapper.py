@@ -23,11 +23,15 @@ os_NotReassigned=[]
 priority_NotReassigned=[]
 component_NotReassigned=[]
 assignee_NotReassigned=[]
-for BugId in range(214000,353001): #[214094, 214195, 215424, 215518, 215858]:
+for BugId in range(214000,353001):#in [314400]:#in [214094, 214195, 215424, 215518, 215858]:#
+
     #BugId=215518
-    url = 'https://bugs.eclipse.org/bugs/show_activity.cgi?id=' + str(BugId)
+
     # Create a handle, page, to handle the contents of the website
-    page = requests.get(url, headers=hdr)
+    with requests.Session() as s:
+        url = 'https://bugs.eclipse.org/bugs/show_activity.cgi?id=' + str(BugId)
+        page = s.get(url, headers=hdr)
+    #page = requests.get(url, headers=hdr)
     # Store the contents of the website under doc
     doc = lh.fromstring(page.content)
     # Parse data that are stored between <tr>..</tr> of HTML
@@ -76,7 +80,7 @@ for BugId in range(214000,353001): #[214094, 214195, 215424, 215518, 215858]:
         Assignee_done = False
         Status_count=0
 
-        #print(BugId,"is considered")
+        print(BugId,"is considered")
         Total_Bugs_Considered.append(BugId)
         for j in range(1, len(tr_elements)):
             for t in tr_elements[j]:
@@ -86,7 +90,7 @@ for BugId in range(214000,353001): #[214094, 214195, 215424, 215518, 215858]:
 
                 #print(name)
                 col.append(((str(name).lower()).replace(" ", "")).replace("\n", ""))
-            #print(col)
+            print(col)
 
             if "status" in col and not(Status_done):
 
@@ -156,7 +160,7 @@ for BugId in range(214000,353001): #[214094, 214195, 215424, 215518, 215858]:
 
             if "assignee" in col and not(Assignee_done):
                 if (not (col[col.index("assignee") + 1].isspace()) and (col[col.index("assignee") + 1].isspace()) != "--"):
-                    #print("Write in assignee Reassigned", BugId)
+                    print("Write in assignee Reassigned", BugId)
                     assignee_Reassigned.append(BugId)
                     Assignee_done = True
                     # assignee_row += updating_to_xlsx("Assignee.xlsx", assignee_row, 1, BugId)
