@@ -1,0 +1,10 @@
+Script took 72045.01720571518
+Total Bugs Considered=55438
+status is reassigned in=1102 Bugs  which is 1.9878061979147876% of Total Bug IDs
+severity is reassigned in=4057 Bugs which is 7.318085068003896% of Total Bug IDs
+version is reassigned in=6339 Bugs which is 11.434395180201307% of Total Bug IDs
+product is reassigned in=2878 Bugs which is 5.1913849705977855% of Total Bug IDs
+os is reassigned in=1781 Bugs which is 3.2125978570655507% of Total Bug IDs
+priority is reassigned in=1441 Bugs which is 2.5993001190519136% of Total Bug IDs
+component is reassigned in=5641 Bugs which is 10.17533100039684% of Total Bug IDs
+assignee is reassigned in=8639 Bugs which is 15.583173996175908% of Total Bug IDs
